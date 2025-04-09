@@ -1,0 +1,27 @@
+<h1>Studenti</h1>
+
+<form method="post">
+    <fieldset>
+        <legend>Nový student</legend>
+    
+    <div>
+        <label for="jmeno">Jméno</label>
+        <input type="text" name="jmeno" id="jmeno">
+    </div>
+
+    <div>
+        <label for="prijmeni">Příjmení</label>
+        <input type="text" name="prijmeni" id="prijmeni">
+    </div>
+
+        <input type="submit" value="Vložit">
+    </fieldset>
+</form>
+
+<ul>
+<?php foreach ($studenti as $s) { ?>
+
+    <li><?= $s["jmeno"] ?> <?= $s["prijmeni"] ?></li>
+
+<?php } ?>
+</ul>
