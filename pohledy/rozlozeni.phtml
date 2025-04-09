@@ -9,8 +9,8 @@
 </head>
 <body>
     <header> 
-        <?php if (isset($_SESSION["uzivatel"])) { ?>
-            Přihlášen: <?= $_SESSION["uzivatel"]["email"] ?>
+        <?php if (isset($_SESSION["User"])) { ?>
+            Přihlášen: <?= $_SESSION["User"]["Email"] ?>
             <a href="logout">Odhlásit se</a>
         <?php } else { ?>
             <a href="login">Přihlásit se</a>

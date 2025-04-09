@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 function nactiTridu($nazevTridy) {
     if (preg_match("/Kontroler$/", $nazevTridy)) 
         require "kontrolery/$nazevTridy.php";

@@ -18,7 +18,7 @@ class SpravceUser{
             SELECT *
             FROM user
             WHERE email = ?
-                AND password = ?
+            AND password = ?
         ";
 
         $hashPassword = $this->vratHashPassword($udajeUser["password"]);
