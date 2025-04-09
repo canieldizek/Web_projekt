@@ -9,4 +9,4 @@ function nactiTridu($nazevTridy) {
 
 spl_autoload_register("nactiTridu");
 
-Db::pripoj("localhost", "root", "", "i3b_wea");
+Db::pripoj("localhost", "root", "", "project_trip_app");
