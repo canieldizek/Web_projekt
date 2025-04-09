@@ -1,62 +1,38 @@
 <?php
 class SmerovacKontroler extends Kontroler {
-  protected $kontroler; // objekt kontroleru
-  
-  // podle URL ($parametry[0]) "předané z indexu" 
-    // nalezne správný kontroler a předá mu řízení 
-  public function zpracuj($parametry) {
+    protected $kontroler;
 
-     $url = $parametry[0];
-     $castiCesty = $this->parsujURL($url);
+    public function zpracuj($parametry) {
+        $url = $parametry;
+        $castiCesty = $this->parsujURL($url);
 
-     if (empty($castiCesty[0])) {
+        if (empty($castiCesty[0])) {
+            $this->presmeruj("uvod");
+        } else {
+            $castNazvuKontroleru = array_shift($castiCesty);
+            $nazevKontroleru = $this->pomlckyDoVelbloudiNotace($castNazvuKontroleru) . "Kontroler";
 
-        // přesměrujeme na výchozí kontroler
-        $this->presmeruj("uvod");
+            if (file_exists("kontrolery/$nazevKontroleru.php")) {
+                $this->kontroler = new $nazevKontroleru;
+                $this->kontroler->zpracuj($castiCesty);
+                $this->pohled = "rozlozeni";
+            } else {
+                echo "Chyba: Kontroler '$nazevKontroleru' neexistuje.";
+                exit;
+            }
+        }
+    }
 
-     } else { // v URL je neprázdná cesta (tedy určen kontroler)      
-          // ["uzivatel", "10", "editace"]    // $castiCesty
+    private function pomlckyDoVelbloudiNotace($text) {
+        $text = str_replace("-", " ", $text);
+        $text = ucwords($text);
+        return str_replace(" ", "", $text);
+    }
 
-          $castNazvuKontroleru = array_shift($castiCesty); // vrátí první prvek a ostatní prvky posune na začátek ["10", "editace"]
-          $nazevKontroleru = $this->pomlckyDoVelbloudiNotace($castNazvuKontroleru)
-                              . "Kontroler";
-
-          if (file_exists("kontrolery/$nazevKontroleru.php")) {
-
-            $this->kontroler = new $nazevKontroleru;
-            $this->kontroler->zpracuj($castiCesty);
-
-            $this->pohled = "rozlozeni";
-
-          } else { // třída kontroleru neexistuje
-
-            // přesměrujeme na chybový kontroler
-            // TODO
-
-          }                             
-     } 
-  }
-  
-  // z kebab-case do CamelCase // z editace-studenta udělá EditaceStudenta
-  private function pomlckyDoVelbloudiNotace($text) {
-      $text = str_replace("-", " ", $text);
-      $text = ucwords($text);
-      $text = str_replace(" ", "", $text);
-      return $text;
-  }
-  
-  // z https://localhost/uzivatel/10/editace 
-  // udělá pole
-  // ["uzivatel", "10", "editace"]
-  private function parsujURL($url) {
-      $naparsovanaURL = parse_url($url);
-      $cesta = $naparsovanaURL["path"];
-      
-      $cesta = ltrim($cesta, "/"); // odebere počáteční lomítko
-      $cesta = trim($cesta); // odebere bílé znaky
-      
-      $rozdelenaCesta = explode("/", $cesta);
-      
-      return $rozdelenaCesta;
-  }
+    private function parsujURL($url) {
+        $naparsovanaURL = parse_url($url);
+        $cesta = ltrim($naparsovanaURL["path"], "/");
+        $cesta = trim($cesta);
+        return explode("/", $cesta);
+    }
 }
