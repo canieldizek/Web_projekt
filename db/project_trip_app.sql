@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: 127.0.0.1
--- Vytvořeno: Pon 07. dub 2025, 13:48
--- Verze serveru: 10.4.28-MariaDB
--- Verze PHP: 8.2.4
+-- Vytvořeno: Stř 09. dub 2025, 21:39
+-- Verze serveru: 10.4.32-MariaDB
+-- Verze PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -94,6 +94,13 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
 
 --
+-- Vypisuji data pro tabulku `user`
+--
+
+INSERT INTO `user` (`ID_user`, `Username`, `Email`, `Password`, `City`, `Country`, `Birthdate`, `Points`, `Rank`) VALUES
+(1, 'admin', 'admin@admin.cz', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Ostrava', 'Česká Republika', '1999-01-01', 0, 0);
+
+--
 -- Indexy pro exportované tabulky
 --
 
@@ -159,7 +166,7 @@ ALTER TABLE `trip_history`
 -- AUTO_INCREMENT pro tabulku `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID_user` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

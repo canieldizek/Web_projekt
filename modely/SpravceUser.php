@@ -1,31 +1,31 @@
 <?php
-class SpravceUzivatelu {
-    public function vratVsechnyUzivatele() {
+class SpravceUser{
+    public function vratVsechnyUser() {
         $sql = "
             SELECT *
-            FROM uzivatele
-            ORDER BY email
+            FROM User
+            ORDER BY Username
         ";
         return Db::dotazVsechny($sql);
     }
 
-    public function vlozUzivatele($udajeUzivatele) {
-        Db::vloz("uzivatele", $udajeUzivatele);
+    public function vlozUser($udajeUser) {
+        Db::vloz("User", $udajeUser);
     }
 
-    public function prihlas($udajeUzivatele) {
+    public function prihlas($udajeUser) {
         $sql = "
             SELECT *
-            FROM uzivatele
+            FROM user
             WHERE email = ?
-                AND heslo = ?
+                AND password = ?
         ";
 
-        $hashHesla = $this->vratHashHesla($udajeUzivatele["heslo"]);
-        $uzivatel = Db::dotazJeden($sql, [$udajeUzivatele["email"], $hashHesla]);
+        $hashPassword = $this->vratHashPassword($udajeUser["password"]);
+        $User = Db::dotazJeden($sql, [$udajeUser["email"], $hashPassword]);
 
-        if ($uzivatel) {
-            $_SESSION["uzivatel"] = $uzivatel;
+        if ($User) {
+            $_SESSION["User"] = $User;
             return 1;
         }
         else
@@ -33,11 +33,11 @@ class SpravceUzivatelu {
     }
 
     public function odhlas() {
-        unset($_SESSION["uzivatel"]);
+        unset($_SESSION["User"]);
     }
 
-    private function vratHashHesla($heslo) {
-        // $sul = "8*@c";
-        return hash("sha256", $heslo /* . $sul */);
+    private function vratHashPassword($Password) {
+       
+        return hash("sha256", $Password );
     }
 }
