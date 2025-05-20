@@ -1,1 +1,3 @@
-login by měl být (snad) zprovozněný, odhlašení a registrace jsou teprve na jidelníčku - email: admin@admin.cz heslo: admin
+pridal jsem css od Honzika a s tim presmerovavani na tamní prihlaseni a registrace
+login, logout i registrace funguje ale nemaji design 👍
+email: admin@admin.cz heslo: admin
