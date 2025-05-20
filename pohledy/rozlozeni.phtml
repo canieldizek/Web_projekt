@@ -9,22 +9,6 @@
     <title>MapujTo</title>
 </head>
 <body>
-    <header> 
-        <?php if (isset($_SESSION["User"])) { ?>
-            Přihlášen: <?= $_SESSION["User"]["Email"] ?>
-            <a href="logout">Odhlásit se</a>
-        <?php } else { ?>
-            <a href="login">Přihlásit se</a>
-            <a href="register">Registrovat se</a>
-        <?php } ?>    
-    </header>
-    <nav>
-       <ul>
-            <li><a href="uvod">Úvod</a></li>
-            <li><a href="body">Body</a></li>
-            <li><a href="student">Studenti</a></li>
-       </ul> 
-    </nav>
     <?php
         $this->kontroler->vypisPohled();
     ?>

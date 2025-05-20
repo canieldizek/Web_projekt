@@ -6,6 +6,6 @@ class LogoutKontroler extends Kontroler {
         $spravceUser = new SpravceUser;
 
         $spravceUser->odhlas();
-
+        $this->presmeruj("uvod");
     }
 }

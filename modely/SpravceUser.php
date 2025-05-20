@@ -40,4 +40,11 @@ class SpravceUser{
        
         return hash("sha256", $Password );
     }
+
+    // funkce pro registraci uzivatele
+    public function register($udajeUser) {
+        $udajeUser["password"] = $this->vratHashPassword($udajeUser["password"]);
+        $this->vlozUser($udajeUser);
+        return true;
+    }
 }
