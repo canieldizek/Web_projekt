@@ -1,0 +1,12 @@
+body {
+    font-family: 'Outfit', sans-serif;
+    background: linear-gradient(to bottom right, #d0eaff, #f4f9ff);
+    min-height: 100vh;
+}
+.card {
+    transition: transform 0.2s ease-in-out;
+}
+.card:hover {
+    transform: scale(1.05);
+}
+
