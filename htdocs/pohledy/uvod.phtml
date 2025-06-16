@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MapujTo | Úvod</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styl.css">
+</head>
+<body>
+    <?php if (isset($_SESSION["User"])) { ?>
+            Přihlášen: <?= $_SESSION["User"]["Username"] ?>
+            <a href="logout">Odhlásit se</a>
+        <?php } ?>
+        
+             
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold">MapujTo</h1>
+            <p class="lead">Naplánuj túru, získej body, a soutěž s ostatními turisty!</p>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
+            <div class="col">
+                <a href="mapa" class="text-decoration-none text-dark">
+                    <div class="card h-100 shadow rounded-4">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">🗺️ Mapa & Nová túra</h5>
+                            <p class="card-text">Zaznač si svou trasu a získej body!</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a href="zebricek" class="text-decoration-none text-dark">
+                    <div class="card h-100 shadow rounded-4">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">🏆 Žebříček turistů</h5>
+                            <p class="card-text">Kdo má nejvíce bodů? Sleduj pořadí!</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <?php if (isset($_SESSION["User"])) { ?>
+            <div class="col">
+                <a href="moje_tury" class="text-decoration-none text-dark">
+                    <div class="card h-100 shadow rounded-4">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">📅 Moje túry</h5>
+                            <p class="card-text">Přehled tvých tras a dosažených bodů.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <?php }else{ ?>
+            
+            <div class="col">
+                <a href="login" class="text-decoration-none text-dark">
+                    <div class="card h-100 shadow rounded-4">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">🔐 Přihlášení & Registrace</h5>
+                            <p class="card-text">Přístup k plné funkcionalitě MapujTo.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+                        
+            <?php } ?>
+        </div>
+    </div>
+</body>
+</html>
