@@ -10,11 +10,7 @@
     <link rel="stylesheet" href="css/styl.css">
 </head>
 <body>
-    <?php if (isset($_SESSION["User"])) { ?>
-            Přihlášen: <?= $_SESSION["User"]["Email"] ?>
-            <a href="logout">Odhlásit se</a>
-        <?php } ?>
-        
+       
              
     <div class="container py-5">
         <div class="text-center mb-5">
@@ -45,11 +41,37 @@
             </div>
             <?php if (isset($_SESSION["User"])) { ?>
             <div class="col">
-                <a href="moje_tury" class="text-decoration-none text-dark">
+                <a href="mojevylety" class="text-decoration-none text-dark">
                     <div class="card h-100 shadow rounded-4">
                         <div class="card-body text-center">
                             <h5 class="card-title">📅 Moje túry</h5>
                             <p class="card-text">Přehled tvých tras a dosažených bodů.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <?php }else{ ?>
+            
+            <div class="col">
+                <a href="login" class="text-decoration-none text-dark">
+                    <div class="card h-100 shadow rounded-4">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">🔐 Přihlášení & Registrace</h5>
+                            <p class="card-text">Přístup k plné funkcionalitě MapujTo.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+                        
+            <?php } ?>
+
+            <?php if (isset($_SESSION["User"])) { ?>
+            <div class="col">
+                <a href="vsechnyvylety" class="text-decoration-none text-dark">
+                    <div class="card h-100 shadow rounded-4">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">📅 Všechny tury</h5>
+                            <p class="card-text">Přehled všech vytvořenych tras</p>
                         </div>
                     </div>
                 </a>

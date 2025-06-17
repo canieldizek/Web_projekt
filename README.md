@@ -7,9 +7,3 @@ _____________________________________________<br/>
 upraveno prihlaseni a registrace, pridano css<br/>
 pridan zebricek (zebricek.phtml, ZebricekKontroler.php, stylZebr.css) - NENI SPOJEN S DATABAZI<br/>
 pridany mapa.phtml, MapaKontroler.php - nevyuzito<br/>
-_____________________________________________<br/>
-                                             <br/>
-16.6.<br/>
-v databazi jsou spojene tabulky (krome ranku s userem)<br/>
-pridany vkladaci formular a kontroler pro trip (neni finalni forma)<br/>
-bude to chtit upravit usera (zrusit zemi, chyba u data narozeni)<br/>

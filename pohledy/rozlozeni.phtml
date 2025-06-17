@@ -6,11 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href=".\img\loga\logoMain.png">
+    <link rel="stylesheet" href="css/styl.css">
     <title>MapujTo</title>
+    <?php if (isset($_SESSION["User"])) { ?>
+            <strong>Přihlášen: </strong> <?= $_SESSION["User"]["Username"] ?><br>
+            <a href="logout" style="color: black;text-decoration: none; font-weight: bold;" >Odhlásit se</a>
+        <?php } ?>
 </head>
 <body>
     <?php
         $this->kontroler->vypisPohled();
     ?>
+    
 </body>
+<footer>
+<?php
+    // Získání názvu právě vykreslované šablony/pohledu
+    $aktualni_stranka = basename($_SERVER['REQUEST_URI']);
+
+    if ($aktualni_stranka !== "uvod" && $aktualni_stranka !== "uvod.phtml") {
+        echo '<p>Vraťte se na <a href="uvod" style="color: black;text-decoration: none; font-weight: bold;">úvod!</a></p>';
+    }
+    ?>
+</footer>
 </html>

@@ -10,3 +10,8 @@ body {
     transform: scale(1.05);
 }
 
+.lin {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
