@@ -7,6 +7,3 @@ _____________________________________________<br/>
 upraveno prihlaseni a registrace, pridano css<br/>
 pridan zebricek (zebricek.phtml, ZebricekKontroler.php, stylZebr.css) - NENI SPOJEN S DATABAZI<br/>
 pridany mapa.phtml, MapaKontroler.php - nevyuzito<br/>
-
-17.6.<br/>
-spousta zmen<br/>
