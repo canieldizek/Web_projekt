@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: 127.0.0.1
--- Vytvořeno: Stř 09. dub 2025, 21:39
--- Verze serveru: 10.4.32-MariaDB
--- Verze PHP: 8.0.30
+-- Vytvořeno: Stř 18. čen 2025, 09:04
+-- Verze serveru: 10.4.28-MariaDB
+-- Verze PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,6 +32,15 @@ CREATE TABLE `difficulty` (
   `Name_diff` varchar(32) NOT NULL,
   `Multiplier` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
+
+--
+-- Vypisuji data pro tabulku `difficulty`
+--
+
+INSERT INTO `difficulty` (`ID_difficulty`, `Name_diff`, `Multiplier`) VALUES
+(1, 'Lehká', 1),
+(2, 'Střední', 1.5),
+(3, 'Těžká', 2);
 
 -- --------------------------------------------------------
 
@@ -60,6 +69,13 @@ CREATE TABLE `trip` (
   `Creator` int(11) NOT NULL,
   `Difficulty` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
+
+--
+-- Vypisuji data pro tabulku `trip`
+--
+
+INSERT INTO `trip` (`ID_trip`, `Name_trip`, `Length`, `Time`, `Creator`, `Difficulty`) VALUES
+(1, 'Tura 1', 12, '03:00:00', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -120,13 +136,16 @@ ALTER TABLE `rank`
 -- Indexy pro tabulku `trip`
 --
 ALTER TABLE `trip`
-  ADD PRIMARY KEY (`ID_trip`);
+  ADD PRIMARY KEY (`ID_trip`),
+  ADD KEY `Difficulty` (`Difficulty`);
 
 --
 -- Indexy pro tabulku `trip_history`
 --
 ALTER TABLE `trip_history`
-  ADD PRIMARY KEY (`ID_th`);
+  ADD PRIMARY KEY (`ID_th`),
+  ADD KEY `ID_user` (`ID_user`,`ID_trip`),
+  ADD KEY `ID_trip` (`ID_trip`);
 
 --
 -- Indexy pro tabulku `user`
@@ -142,7 +161,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pro tabulku `difficulty`
 --
 ALTER TABLE `difficulty`
-  MODIFY `ID_difficulty` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_difficulty` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pro tabulku `rank`
@@ -154,7 +173,7 @@ ALTER TABLE `rank`
 -- AUTO_INCREMENT pro tabulku `trip`
 --
 ALTER TABLE `trip`
-  MODIFY `ID_trip` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_trip` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pro tabulku `trip_history`
@@ -167,6 +186,23 @@ ALTER TABLE `trip_history`
 --
 ALTER TABLE `user`
   MODIFY `ID_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Omezení pro exportované tabulky
+--
+
+--
+-- Omezení pro tabulku `trip`
+--
+ALTER TABLE `trip`
+  ADD CONSTRAINT `trip_ibfk_1` FOREIGN KEY (`Difficulty`) REFERENCES `difficulty` (`ID_difficulty`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Omezení pro tabulku `trip_history`
+--
+ALTER TABLE `trip_history`
+  ADD CONSTRAINT `trip_history_ibfk_1` FOREIGN KEY (`ID_user`) REFERENCES `user` (`ID_user`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `trip_history_ibfk_2` FOREIGN KEY (`ID_trip`) REFERENCES `trip` (`ID_trip`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
