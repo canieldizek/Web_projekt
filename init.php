@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+require "vendor/autoload.php";
 function nactiTridu($nazevTridy) {
     if (preg_match("/Kontroler$/", $nazevTridy)) 
         require "kontrolery/$nazevTridy.php";
