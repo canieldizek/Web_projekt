@@ -24,7 +24,7 @@ class SpravceUser{
         $hashPassword = $this->vratHashPassword($udajeUser["password"]);
         $User = Db::dotazJeden($sql, [$udajeUser["email"], $hashPassword]);
 
-        if ($User) {
+         if ($User) {
             $_SESSION["User"] = $User;
             return 1;
         }
@@ -43,8 +43,25 @@ class SpravceUser{
 
     // funkce pro registraci uzivatele
     public function register($udajeUser) {
+
         $udajeUser["password"] = $this->vratHashPassword($udajeUser["password"]);
         $this->vlozUser($udajeUser);
         return true;
+    }
+    public function overeniEmailu($email) {
+        $sql = "select Email from user where email = ?";
+    if(Db::dotazJeden($sql,[$email])){
+        return false;
+    } else {
+        return true;
+    }
+    }
+    public function overeniJmena($Username) {
+        $sql = "select Username from user where Username = ?";
+    if(Db::dotazJeden($sql,[$Username])){
+        return false;
+    } else {
+        return true;
+    }
     }
 }
